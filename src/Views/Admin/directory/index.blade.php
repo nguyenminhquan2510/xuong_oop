@@ -40,6 +40,8 @@ Directory
                                     <tr>
                                         <th>ID_Directory</th>
                                         <th>Name_Directory</th>
+                                        <th>Created_at</th>
+                                        <th>Update_at</th>
                                         <th>Action</th>
 
                                     </tr>
@@ -51,6 +53,12 @@ Directory
                                     </td>
                                     <td>
                                         <?= $directory['name'] ?>
+                                    </td>
+                                    <td>
+                                        <?= $directory['created_at'] ?>
+                                    </td> 
+                                    <td>
+                                        <?= $directory['upload_at'] ?>
                                     </td>
                                     <td>
                                         <a href="{{ url("admin/directory/{$directory['idDirectory']}/show") }}"

@@ -39,6 +39,7 @@ Content
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Title</th>
                                         <th>Content</th>
                                         <th>Image</th>
                                         <th>Created at</th>
@@ -52,7 +53,16 @@ Content
                                         <?= $content['id'] ?>
                                     </td>
                                     <td>
-                                        <?= $content['content'] ?>
+                                        <?= $content['title'] ?>
+                                    </td>
+                                    <td>
+                                        <p style="  display: -webkit-box;
+                                                    -webkit-line-clamp: 4;
+                                                    -webkit-box-orient: vertical;
+                                                    overflow: hidden;
+                                                    color:black">
+                                            <?= $content['content'] ?>
+                                        </p>
                                     </td>
                                     <td>
                                         <img src="{{ show_upload($content['image']) }}" width="100px" alt="">
@@ -75,6 +85,11 @@ Content
                                 </tbody>
                                 @endforeach
                             </table>
+                            <?php for ($i=1; $i <= $totalPage; $i++) { ?>
+                                <a style="background-color: #ccc;padding:5px;margin:2px;color:#000;" href="?page={{$i}}">
+                                    {{$i}}
+                                </a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

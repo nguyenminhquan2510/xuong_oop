@@ -18,9 +18,12 @@ class UserController extends Controller
 
     public function index()
     {
-        $users = $this->user->all();
+        $page=$_GET["page"] ?? 1;
+        [$users,$totalPage] = $this->user->paginate((int)$page, $perPage = 5);
+       
         $this->renderViewAdmin('users.index', [
             'users' => $users,
+            'totalPage'=> $totalPage
         ]);
     }
 
@@ -34,6 +37,7 @@ class UserController extends Controller
         $validator = new Validator;
         $validation = $validator->make($_POST + $_FILES, [
             'name'                  => 'required|max:50',
+            'type'                  => 'required|min:0',
             'email'                 => 'required|email',
             'password'              => 'required|min:6',
             'avatar'                => 'uploaded_file:0,2048K,png,jpeg,jpg',
@@ -48,6 +52,7 @@ class UserController extends Controller
         } else {
             $data = [
                 'name' => $_POST['name'],
+                'type' => $_POST['type'],
                 'email' => $_POST['email'],
                 'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
             ];
@@ -101,6 +106,7 @@ class UserController extends Controller
         $validation = $validator->make($_POST + $_FILES, [
             'name'      => 'required|max:50',
             'email'     => 'required|email',
+            'type'      => 'required|min:0',
             'password'  => 'min:6',
             'avatar'    => 'uploaded_file:0,2048K,png,jpeg,jpg'
         ]);
@@ -115,8 +121,10 @@ class UserController extends Controller
             $data = [
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
+                'type' => $_POST['type'],
                 'password' => !empty($_POST['password'])
-                    ?? password_hash($_POST['password'], PASSWORD_DEFAULT)::$user['password']
+                    ? password_hash($_POST['password'],
+                    PASSWORD_DEFAULT):$user['password'],
             ];
             $flagUpload = false;
             if (!empty($_FILES['avatar']) && $_FILES['avatar']['size'] > 0) {
@@ -136,8 +144,8 @@ class UserController extends Controller
 
             $this->user->update($id, $data);
 
-            if($flagUpload && $user['avata'] && file_exists(PATH_ASSET .$user['avata'] ) ){
-                unlink(PATH_ASSET .$user['avata']);
+            if($flagUpload && $user['avatar'] && file_exists(PATH_ASSET .$user['avatar'] ) ){
+                unlink(PATH_ASSET .$user['avatar']);
             }
             $_SESSION['status'] = true;
             $_SESSION['msg'] = 'Thao tác thành công!';
@@ -154,8 +162,8 @@ class UserController extends Controller
         try {
             //code...
             $this->user->delete($id);
-            if($user['avata'] && file_exists(PATH_ASSET .$user['avata'] ) ){
-                unlink(PATH_ASSET .$user['avata']);
+            if($user['avatar'] && file_exists(PATH_ASSET .$user['avatar'] ) ){
+                unlink(PATH_ASSET .$user['avatar']);
             }
             $_SESSION['status'] = true;
             $_SESSION['msg'] = "Xóa thành công";

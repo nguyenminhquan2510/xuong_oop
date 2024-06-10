@@ -1,0 +1,19 @@
+<script data-cfasync="false" src="{{client_js('../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery-3.6.0.min.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.ba-bbq.min.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery-ui-1.12.1.custom.min.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.easing.1.4.1.min.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.carouFredSel-6.2.1-packed.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.touchSwipe.min.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.transit.min.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.sliderControl.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.timeago.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.hint.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.prettyPhoto.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.qtip.min.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.blockUI.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/jquery.imagesloaded-packed.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/main.js')}}"></script>
+<script type="text/javascript" src="{{client_js('js/odometer.min.js')}}"></script>
+<link rel="stylesheet" type="text/css" href="style_selector/style_selector.css">
+<script type="text/javascript" src="{{client_js('style_selector/style_selector.js')}}"></script>

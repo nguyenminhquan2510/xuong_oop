@@ -47,6 +47,43 @@ class Model
         ->from($this->tableName)
         ->fetchOne();
     }
+    public function count_nn()
+    {
+        return $this->queryBuilder
+        ->select("COUNT(*) as $this->tableName")
+        ->where("idDirectory =2")
+        ->from($this->tableName)
+        ->fetchOne();
+    }
+    public function count_tt()
+    {
+        return $this->queryBuilder
+        ->select("COUNT(*) as $this->tableName")
+        ->where("idDirectory =4")
+        ->from($this->tableName)
+        ->fetchOne();
+    }  public function count_tn()
+    {
+        return $this->queryBuilder
+        ->select("COUNT(*) as $this->tableName")
+        ->where("idDirectory =1")
+        ->from($this->tableName)
+        ->fetchOne();
+    }  public function count_sk()
+    {
+        return $this->queryBuilder
+        ->select("COUNT(*) as $this->tableName")
+        ->where("idDirectory =11")
+        ->from($this->tableName)
+        ->fetchOne();
+    }public function count_ts()
+    {
+        return $this->queryBuilder
+        ->select("COUNT(*) as $this->tableName")
+        ->where("idDirectory =5")
+        ->from($this->tableName)
+        ->fetchOne();
+    }
 
     public function paginate($page = 1, $perPage = 5)
     {
@@ -78,44 +115,12 @@ class Model
 
     public function insert(array $data)
     {
-        if (!empty($data)) {
-            $query = $this->queryBuilder->insert($this->tableName);
-
-            $index = 0;
-            foreach($data as $key => $value) {
-                $query->setValue($key, '?')->setParameter($index, $value);
-                
-                ++$index;
-            }
-
-            $query->executeQuery();
-
-            return true;
-        }
-        
-        return false;
+        return $this->conn->insert($this->tableName,$data);
     }
 
     public function update($id, array $data)
     {
-        if (!empty($data)) {
-            $query = $this->queryBuilder->update($this->tableName);
-
-            $index = 0;
-            foreach($data as $key => $value) {
-                $query->set($key, '?')->setParameter($index, $value);
-
-                ++$index;
-            }
-
-            $query->where('id = ?')
-                ->setParameter(count($data), $id)
-                ->executeQuery();
-
-            return true;
-        }
-        
-        return false;
+        return $this->conn->update($this->tableName,$data,['id'=>$id]);
     }
 
     public function delete($id)

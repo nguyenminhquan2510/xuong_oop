@@ -5,9 +5,20 @@ use Ductong\FpolyBaseWeb3014\Controllers\Admin\UserController;
 use Ductong\FpolyBaseWeb3014\Controllers\Admin\ContentController;
 use Ductong\FpolyBaseWeb3014\Controllers\Admin\DirectoryController;
 
+$router->before('GET|POST', '/admin/*.*', function () {
+    if(!is_logged()){
+        header('Location:'.url('client/login'));
+        exit;
+    }
+    // if(!is_admin()){
+    //     header('Location:'.url('client'));
+    //     exit;
+    // }
+});
+
 $router->mount('/admin', function () use ($router) {
     $router->get('/',               DashboardControllers::class . '@dashboard');
-    
+
     // CRUD USER
     $router->mount('/users', function () use ($router) {
         $router->get('/',               UserController::class . '@index');
@@ -36,5 +47,4 @@ $router->mount('/admin', function () use ($router) {
         $router->post('/{idDirectory}/update',   DirectoryController::class . '@update');
         $router->get('/{idDirectory}/delete',    DirectoryController::class . '@delete');
     });
-    
 });

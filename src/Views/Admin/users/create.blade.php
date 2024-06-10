@@ -31,6 +31,11 @@
             <label for="avatar" class="form-label">Avatar:</label>
             <input type="file" class="form-control" id="avatar" placeholder="Enter avatar" name="avatar">
         </div>
+        <div class="">
+            <label for="email" class="form-label">Type:</label> <br>
+            <input type="radio" class="" id="email" placeholder="Enter email" name="type" value="admin">Admin
+            <input type="radio" class="" id="email" placeholder="Enter email" name="type" value="member">Member
+        </div>
         <div class="mb-3 mt-3">
             <label for="password" class="form-label">Password:</label>
             <input type="text" class="form-control" id="password" placeholder="Enter password" name="password">

@@ -18,6 +18,7 @@ unset($_SESSION['errors']);
 @endphp
 @endif
 
+
 <form action="{{ url('admin/content/store') }}" enctype="multipart/form-data" method="POST">
     <div class="mb-3 mt-3">
         <label for="image" class="form-label">Image:</label>
@@ -26,6 +27,10 @@ unset($_SESSION['errors']);
     <div class="mb-3 mt-3">
         <label for="content" class="form-label">Content:</label>
         <input type="text" class="form-control" id="content" placeholder="Enter content" name="content" style="height: 300px">
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="title" class="form-label">Title:</label>
+        <input type="text" class="form-control" id="title" placeholder="Enter title" name="title" >
     </div>
     <div class="mb-3 mt-3">
         <label for="name" class="form-label">Name Directory:</label> <br>

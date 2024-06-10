@@ -31,6 +31,11 @@
             <label for="avatar" class="form-label">Avatar:</label>
             <input type="file" class="form-control" id="avatar" value="{{$user['avatar']}}" placeholder="Enter avatar" name="avatar"><img width="100px" src="{{show_upload($user['avatar'])}}" alt="">
         </div>
+        <div class="">
+            <label for="email" class="form-label">Type:</label> <br>
+            <input type="radio" class="" id="email" placeholder="Enter email" name="type" value="admin" {{$user['type']=='admin' ? 'checked':''}}>Admin
+            <input type="radio" class="" id="email" placeholder="Enter email" name="type" value="member" {{$user['type']=='member' ? 'checked':''}}>Member
+        </div>
         <div class="mb-3 mt-3">
             <label for="password" class="form-label">Password:</label>
             <input type="text" class="form-control" id="password" placeholder="Enter password" name="password">

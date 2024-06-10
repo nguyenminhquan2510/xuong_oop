@@ -21,7 +21,11 @@
     <form action="{{ url("admin/content/{$content['id']}/update") }}" enctype="multipart/form-data" method="POST">
         <div class="mb-3 mt-3">
             <label for="content" class="form-label">Content:</label>
-            <input type="text" class="form-control" id="content" value="{{$content['content']}}" placeholder="Enter name" name="name">
+            <input type="text" class="form-control" id="content" value="{{$content['content']}}" placeholder="Enter name" name="content" style="height: 300px">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" class="form-control" id="title" value="{{$content['title']}}" placeholder="Enter name" name="title">
         </div>
         <div class="mb-3 mt-3">
             <label for="image" class="form-label">Image:</label>
@@ -29,11 +33,16 @@
         </div>
         <div class="mb-3 mt-3">
             <label for="created_at" class="form-label">Created_at:</label>
-            <input type="created_at" class="form-control" id="created_at" value="{{$content['created_at']}}" placeholder="" name="email">
+            <input type="created_at" class="form-control" id="created_at" value="{{$content['created_at']}}" placeholder="" name="created_at">
         </div>
         <div class="mb-3 mt-3">
-            <label for="Name_Directory" class="form-label">Name_Directory:</label>
-            <input type="text" class="form-control" id="Name_Directory" value="{{$content['name']}}" placeholder="Enter Name_Directory" name="Name_Directory">
+            <label for="name" class="form-label">Name Directory:</label> <br>
+            <select name="idDirectory" id="">
+                <option value="{{$content['idDirectory']}}"><?= $content['name']?></option>
+                @foreach ($name_directory as $n)
+                <option value="{{$n['idDirectory']}}"><?= $n['name']?></option>
+                @endforeach
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

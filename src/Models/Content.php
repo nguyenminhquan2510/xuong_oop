@@ -14,7 +14,7 @@ class Content extends Model
             ->select('c.*', 'd.name')
             ->from($this->tableName, 'c')
             ->innerJoin('c', 'directory', 'd', 'c.idDirectory = d.idDirectory')
-            ->orderBy('id', 'desc')
+            ->orderBy('c.id', 'desc')
             ->fetchAllAssociative();
     }
     public function name_directory()
@@ -33,5 +33,24 @@ class Content extends Model
             ->where('id = ?')
             ->setParameter(0, $id)
             ->fetchAssociative();
+    }
+    public function paginate_Directory($page = 1, $perPage = 5)
+    {
+        $queryBuilder=clone($this->queryBuilder);
+        $totalPage = ceil($this->count() / $perPage);
+        $offset = $perPage * ($page - 1);
+
+        $data = $queryBuilder
+
+        ->select('c.*', 'd.name')
+        ->from($this->tableName, 'c')
+        ->innerJoin('c', 'directory', 'd', 'c.idDirectory = d.idDirectory')
+        ->setFirstResult($offset)
+        ->setMaxResults($perPage)
+        ->orderBy('c.id', 'desc')
+        ->fetchAllAssociative();
+
+
+        return [$data, $totalPage];
     }
 }

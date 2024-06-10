@@ -42,6 +42,7 @@ Index
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Avatar</th>
+                                        <th>Type</th>
                                         <th>Created at</th>
                                         <th>Update at</th>
                                         <th>Action</th>
@@ -62,6 +63,9 @@ Index
                                         <img src="{{ show_upload($user['avatar']) }}" width="100px" alt="">
                                     </td>
                                     <td>
+                                        <?= $user['type'] ?>
+                                    </td>
+                                    <td>
                                         <?= $user['created_at'] ?>
                                     </td>
                                     <td>
@@ -77,15 +81,21 @@ Index
                                     </td>
 
                                 </tbody>
+                                
                                 @endforeach
-                            </table>
-                        </div>
+                                </table>
+                                </div>
+                            <?php for ($i=1; $i <= $totalPage; $i++) { ?>
+                                <a style="background-color: #ccc;padding:5px;margin:2px;color:#000;" href="?page={{$i}}">
+                                    {{$i}}
+                                </a>
+                            <?php } ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
 
 
 

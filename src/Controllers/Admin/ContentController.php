@@ -16,9 +16,12 @@ class ContentController extends Controller
     }
     public function index()
     {
-        $contents = $this->content->all_join_connent();
+        $page=$_GET["page"] ?? 1;
+        [$contents,$totalPage] = $this->content->paginate_Directory((int)$page, $perPage = 5);
+       
         $this->renderViewAdmin('content.index', [
             'contents' => $contents,
+            'totalPage'=> $totalPage
         ]);
     }
     public function create()
@@ -33,7 +36,8 @@ class ContentController extends Controller
 
         $validator = new Validator;
         $validation = $validator->make($_POST, [
-            'content'                  => 'required|max:50',
+            'content'                  => 'required|min:10',
+            'title'                  => 'required|min:1',
             'idDirectory'              => 'required|max:50',
             'image'                    => 'uploaded_file:0,2048K,png,jpeg,jpg',
         ]);
@@ -47,6 +51,7 @@ class ContentController extends Controller
         } else {
             $data = [
                 'content' => $_POST['content'],
+                'title' => $_POST['title'],
                 'idDirectory' => $_POST['idDirectory'],
             ];
 
@@ -83,9 +88,11 @@ class ContentController extends Controller
     }
     public function edit($id)
     {
+        $name_directory = $this->content->name_directory();
         $content = $this->content->findByID_join_connent($id);
         $this->renderViewAdmin('content.update', [
             'content' => $content,
+            'name_directory'=> $name_directory,
         ]);
     }
     public function update($id)
@@ -93,8 +100,9 @@ class ContentController extends Controller
         $content = $this->content->findByID_join_connent($id);
         $validator = new Validator;
         $validation = $validator->make($_POST +$_FILES, [
-            'content'                  => 'required|max:50',
+            'content'                  => 'required|min:10',
             'idDirectory'              => 'required|max:50',
+            'title'                  => 'required|min:1',
             'image'                    => 'uploaded_file:0,2048K,png,jpeg,jpg',
         ]);
         $validation->validate();
@@ -108,6 +116,7 @@ class ContentController extends Controller
             $data = [
                 'content' => $_POST['content'],
                 'idDirectory' => $_POST['idDirectory'],
+                'title' => $_POST['title'],
             ];
             $flagUpload = false;
             if (!empty($_FILES['image']) && $_FILES['image']['size'] > 0) {
@@ -132,8 +141,26 @@ class ContentController extends Controller
             $_SESSION['status'] = true;
             $_SESSION['msg'] = 'Thao tác thành công!';
 
-            header('Location: ' . url("admin/content/{$content['id']}/edit"));
+            header('Location: ' . url("admin/content/"));
             exit;
         }
+    }
+    public function delete($id) {
+        $content = $this->content->findByID_join_connent($id);
+        try {
+            //code...
+            $this->content->delete($id);
+            if($content['image'] && file_exists(PATH_ASSET .$content['image'] ) ){
+                unlink(PATH_ASSET .$content['image']);
+            }
+            $_SESSION['status'] = true;
+            $_SESSION['msg'] = "Xóa thành công";
+        } catch (\Throwable $th) {
+            //throw $th;
+            $_SESSION['status'] = false;
+            $_SESSION['msg'] = "Xóa không thành công";
+        }
+        header('Location: ' . url('admin/content'));
+        exit();
     }
 }

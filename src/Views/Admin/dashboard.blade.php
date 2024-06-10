@@ -9,7 +9,13 @@
     <div class="col-12">
         <div class="page_title_box d-flex align-items-center justify-content-between">
             <div class="page_title_left">
-                <h3 class="f_s_30 f_w_700 text_white">Dashboard</h3>
+                <div class="white_card_header">
+                    <div class="box_header m-0">
+                        <div class="main-title">
+                            <h1 class="m-0">Dashboard</h1>
+                        </div>
+                    </div>
+                </div>
                 <ol class="breadcrumb page_bradcam mb-0">
                     <li class="breadcrumb-item"><a href="javascript:void(0);">Salessa </a></li>
                     <li class="breadcrumb-item"><a href="javascript:void(0);">Dashboard</a></li>
@@ -26,7 +32,7 @@
             <div class="white_card_header">
                 <div class="box_header m-0">
                     <div class="main-title">
-                        <h3 class="m-0">Revenue</h3>
+                        <h3 class="m-0" style="font-size: 25px">Thống Kê</h3>
                     </div>
                     <div class="float-lg-right float-none sales_renew_btns justify-content-end">
                         <ul class="nav">
@@ -42,8 +48,19 @@
                     </div>
                 </div>
             </div>
-            <div class="white_card_body" style="height: 286px;">
-                <canvas id="bar"></canvas>
+            <div style="display: flex;">
+                <div style="border: 1px solid #ccc;margin: 5px; width: 400px;height: 150px;border-radius: 5px;">
+                    <p style="padding: 10px;background-color: #64c5b1;margin: 0;color: aliceblue;font-weight: 600;font-size:20px">BÀI VIẾT</p>
+                    <p style="padding: 10px;font-size:20px;margin-top:20px">{{$dem_content}}</p>
+                </div>
+                <div style="border: 1px solid #ccc;margin: 5px; width: 400px;height: 150px;border-radius: 5px;">
+                    <p style="padding: 10px;background-color: #64c5b1;margin: 0;color: aliceblue;font-weight: 600;font-size:20px">DANH MỤC</p>
+                    <p style="padding: 10px;font-size:20px;margin-top:20px">{{$dem_directory}}</p>
+                </div>
+                <div style="border: 1px solid #ccc;margin: 5px; width: 400px;height: 150px;border-radius: 5px;">
+                    <p style="padding: 10px;background-color: #64c5b1;margin: 0;color: aliceblue;font-weight: 600;font-size:20px">USERS</p>
+                    <p style="padding: 10px;font-size:20px;margin-top:20px">{{$dem_user}}</p>
+                </div>
             </div>
         </div>
         <div class="white_card mb_20">
